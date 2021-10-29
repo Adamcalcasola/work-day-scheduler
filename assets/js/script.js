@@ -1,7 +1,11 @@
+var array = [];
+var currentDay = document.querySelector("#currentDay");
+currentDay.textContent = moment().format('dddd, MMMM Do');
+
 //var timeRowEl = document.createElement
 var container = document.querySelector(".container");
 // container.appendChild(divEl);
-console.log(container);
+// console.log(container);
 var hour = 9;
 var timeVar = moment().hour();
 for (i = 0; i < 9; i++) {
@@ -9,6 +13,8 @@ for (i = 0; i < 9; i++) {
     var hourEl = document.createElement("div");
     var textAreaEl = document.createElement("textarea");
     var buttonEl = document.createElement("button");
+    textAreaEl.setAttribute("id", "content" + i);
+    buttonEl.setAttribute("id", "save" + i);
     
     outerDiv.className = "row time-block";
     //textAreaEl.className = "col-sm-10 description";
@@ -32,11 +38,13 @@ for (i = 0; i < 9; i++) {
     outerDiv.appendChild(hourEl);
     outerDiv.appendChild(textAreaEl);
     outerDiv.appendChild(buttonEl);
-    //console.log(outerDiv);
     container.appendChild(outerDiv);
     hour++;
-    }
+}
 
+var saveContent = function() {
+    console.log(buttonEl);
+}
 
-
+buttonEl.addEventListener("click", saveContent);
 console.log(moment().hour());
