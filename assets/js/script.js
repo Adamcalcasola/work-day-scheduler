@@ -1,11 +1,24 @@
-// Global Variable
+// Global Variables
 var list = ["", "", "", "", "", "", "", "", ""];
 var time = moment().hour();
 var hour = 9;
 var currentDay = document.querySelector("#currentDay");
 var container = document.querySelector(".container");
+var outerDiv = document.createElement("div");
+var hourEl = document.createElement("div");
+var textAreaEl = document.createElement("textarea");
+var buttonEl = document.createElement("button");
 
 currentDay.textContent = moment().format('dddd, MMMM Do');
+
+// refreshes page every hour
+function refresh() {
+    if (time == hour) {
+        location.reload();
+    }
+}
+
+var interval = setInterval(refresh, 60000);
 
 // function to change color of events as time passes
 function hourPast() {
@@ -51,36 +64,39 @@ var saveContent = function(event) {
 }
 
 // displays page content
-for (i = 0; i < 9; i++) {
-    
-    var outerDiv = document.createElement("div");
-    var hourEl = document.createElement("div");
-    var textAreaEl = document.createElement("textarea");
-    var buttonEl = document.createElement("button");
+function display() {
+    for (i = 0; i < 9; i++) {
+        
+        outerDiv = document.createElement("div");
+        hourEl = document.createElement("div");
+        textAreaEl = document.createElement("textarea");
+        buttonEl = document.createElement("button");
 
-    textAreaEl.setAttribute("Id", "content" + i);
-    buttonEl.setAttribute("Id", i);
-    
-    outerDiv.className = "row time-block";
-    textAreaEl.className = "col-sm-10 description";
-    buttonEl.className = "col-sm-1 saveBtn btn";
-    hourEl.className = "col-sm-1 hour";
-    
-    textAreaEl.value = list[i];
-    buttonEl.innerHTML = "<i class='fas fa-save'></i>"
-    
-    hourPast();
-    
-    meridiem();
-    
-    outerDiv.appendChild(hourEl);
-    outerDiv.appendChild(textAreaEl);
-    outerDiv.appendChild(buttonEl);
-    container.appendChild(outerDiv);
-    
-    hour++;
+        textAreaEl.setAttribute("Id", "content" + i);
+        buttonEl.setAttribute("Id", i);
+        
+        outerDiv.className = "row time-block";
+        textAreaEl.className = "col-sm-10 description";
+        buttonEl.className = "col-sm-1 saveBtn btn";
+        hourEl.className = "col-sm-1 hour";
+        
+        textAreaEl.value = list[i];
+        buttonEl.innerHTML = "<i class='fas fa-save'></i>"
+        
+        hourPast();
+        
+        meridiem();
+        
+        outerDiv.appendChild(hourEl);
+        outerDiv.appendChild(textAreaEl);
+        outerDiv.appendChild(buttonEl);
+        container.appendChild(outerDiv);
+        
+        hour++;
+    }
 }
 
+display();
 
 // event listeners for save buttons
 document.getElementById("0").addEventListener("click", saveContent);
