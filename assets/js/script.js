@@ -13,9 +13,7 @@ currentDay.textContent = moment().format('dddd, MMMM Do');
 
 // refreshes page every hour
 function refresh() {
-    if (time == hour) {
-        location.reload();
-    }
+    location.reload();
 }
 
 var interval = setInterval(refresh, 60000);
